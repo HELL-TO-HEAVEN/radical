@@ -29,9 +29,9 @@ else:
 	bright_backround = 1
 
 
-path = '/oasis/scratch/comet/statho/temp_project/Dataset_2GB/'
-path_for_input = path + 'inputs/file_'
-path_for_output =  path + 'outputs/out_file_'
+path = '/oasis/scratch/comet/statho/temp_project/Dataset_12GB/'
+path_for_input = path + 'inputs/'
+path_for_output =  path + 'outputs/'
 
 read_from = int(sys.argv[1])
 read_until = int(sys.argv[2])  
@@ -54,15 +54,15 @@ while read_from <= read_until:
 	# compute the Euclidean distance from every binary pixel to the nearest zero pixel 
 	# and then find peaks in this distance map
 	#
-	D = ndimage.distance_transform_edt(foreground_mask)
+	distance = ndimage.distance_transform_edt(foreground_mask)
 
-	localMax = peak_local_max(D, indices=False, min_distance=30, labels=foreground_mask)
+	localMax = peak_local_max(distance, indices=False, min_distance=30, labels=foreground_mask)
 
 	# perform a connected component analysis on the local peaks,
 	# using 8-connectivity, then apply the Watershed algorithm
 	#
 	markers = ndimage.label(localMax, structure=np.ones((3, 3)))[0]
-	labels = watershed(-D, markers, mask=foreground_mask)
+	labels = watershed(-distance, markers, mask=foreground_mask)
 
 	#print "In image {}, there are {} segments found!".format(image, len(np.unique(labels)) - 1)
 
@@ -73,14 +73,13 @@ while read_from <= read_until:
 	
 		# if the label is zero, we are examining the 'background' so ignore it
 		#
-		if label == 0:
-			continue
+		if label != 0:
+	
+			mask = np.zeros(img_gray.shape, dtype="uint8")	
+			mask[labels == label] = 255
 
-		mask = np.zeros(img_gray.shape, dtype="uint8")	
-		mask[labels == label] = 255
-
-		edge_sobel = sobel(mask)	
-		img[edge_sobel > 0] = [0,255,0] 
+			edge_sobel = sobel(mask)	
+			img[edge_sobel > 0] = [0,255,0] 
 
 	io.imsave(path_for_output + str(read_from) + '.BMP', img)
 
