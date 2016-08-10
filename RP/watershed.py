@@ -34,14 +34,14 @@ else:
 
 # compute the Euclidean distance from every binary pixel 
 # to the nearest zero pixel, then find peaks in this distance map
-D = ndimage.distance_transform_edt(foreground_mask)
+distance = ndimage.distance_transform_edt(foreground_mask)
 
-localMax = peak_local_max(D, indices=False, min_distance=20, labels=foreground_mask)
+localMax = peak_local_max(distance, indices=False, min_distance=20, labels=foreground_mask)
 
 # perform a connected component analysis on the local peaks,
 # using 8-connectivity, then apply the Watershed algorithm
 markers = ndimage.label(localMax, structure=np.ones((3, 3)))[0]
-labels = watershed(-D, markers, mask=foreground_mask)
+labels = watershed(-distance, markers, mask=foreground_mask)
 
 #print "There are {} segments found!".format(len(np.unique(labels)) - 1)
 
