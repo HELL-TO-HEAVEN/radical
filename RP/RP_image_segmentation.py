@@ -69,8 +69,7 @@ if __name__ == "__main__":
             #c.user_id = "tg835489"            # for Stampede/Wrangler
             c.user_id = "statho"               # for Comet/Gordon
             session.add_context(c)
-
-            path = '/oasis/scratch/comet/$USER/temp_project/Dataset_2GB/inputs/'
+            #path = '/oasis/scratch/comet/$USER/temp_project/Dataset_12GB/inputs/'
 
         else:
             
@@ -95,7 +94,7 @@ if __name__ == "__main__":
         pdesc.resource = resource
         #pdesc.project = "TG-MCB090174"      # for Stampede/Wrangler
         pdesc.project = "unc100"             # for Comet/Gordon
-        pdesc.runtime = 20                   # minutes
+        pdesc.runtime = 15                   # minutes
         pdesc.cores = pilot_cores
 
         print "Submitting Compute Pilot to PilotManager"
