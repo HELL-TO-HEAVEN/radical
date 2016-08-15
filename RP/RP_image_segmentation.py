@@ -191,10 +191,12 @@ if __name__ == "__main__":
             profiling.write(cu_info[0] + ',' + cu_info[1] + ',' + cu_info[2] + ',' + cu_info[3] 
                                 + ',' + cu_info[4] + ',' + cu_info[5] + ',' + cu_info[6] + '\n')
 
+        finish_time = time.time()
+        total_time = (finish_time - start_time) / 60.0  # total execution time
+        profiling.write("\nTTC," + str(total_time))
+
         profiling.close()
 
-        finish_time = time.time()
-        total_time = (finish_time - start_time) / 60                    # total execution time	
         print 'The total execution time is: %f minutes' % total_time
         
 
