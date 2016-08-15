@@ -48,7 +48,7 @@ if __name__ == "__main__":
     # 
     try:
 
-        #start_time = time.time()
+        start_time = time.time()
 
         if len(sys.argv) == 5:
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
         pdesc.resource = resource
         #pdesc.project = "TG-MCB090174"      # for Stampede/Wrangler
         pdesc.project = "unc100"             # for Comet/Gordon
-        pdesc.runtime = 15                   # minutes
+        pdesc.runtime = 10                   # minutes
         pdesc.cores = pilot_cores
 
         print "Submitting Compute Pilot to PilotManager"
@@ -193,10 +193,9 @@ if __name__ == "__main__":
 
         profiling.close()
 
-        #finish_time = time.time()
-        #total_time = finish_time - start_time  # total execution time	
-        #print 'The total execution time is: %f seconds' % total_time
-        #total_time /= 60        
+        finish_time = time.time()
+        total_time = (finish_time - start_time) / 60                    # total execution time	
+        print 'The total execution time is: %f minutes' % total_time
         
 
     except Exception as e:
