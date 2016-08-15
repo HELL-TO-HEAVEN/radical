@@ -8,5 +8,5 @@ name = '*' + extension
 i = 0
 
 for fname in glob(name):
-    rename(fname, 'file_'+str(i)+extension)
+    rename(fname, str(i)+extension)
     i += 1
