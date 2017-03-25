@@ -1,2 +1,2 @@
-# watershed-image_seg
-Implementation of the Watersched algorithm for image segmentation (algorithm "tuned" for tissue images)
+# RADICAL
+This repo contains a project for RADICAL Lab.

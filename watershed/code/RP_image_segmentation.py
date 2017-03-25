@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import commands
 import radical.pilot as rp
 
 
@@ -69,7 +70,7 @@ if __name__ == "__main__":
             #c.user_id = "tg835489"            # for Stampede/Wrangler
             c.user_id = "statho"               # for Comet/Gordon
             session.add_context(c)
-            #path = '/oasis/scratch/comet/$USER/temp_project/Dataset_8GB/inputs/'
+            #path = '/oasis/scratch/comet/$USER/temp_project/Dataset_64GB/inputs/'
 
         else:
             
@@ -97,7 +98,7 @@ if __name__ == "__main__":
         pdesc.resource = resource
         #pdesc.project = "TG-MCB090174"      # for Stampede/Wrangler
         pdesc.project = "unc100"             # for Comet/Gordon
-        pdesc.runtime = 10                   # minutes
+        pdesc.runtime = 24                  # minutes
         pdesc.cores = pilot_cores
 
         print "Submitting Compute Pilot to PilotManager"
@@ -195,7 +196,7 @@ if __name__ == "__main__":
         profiling.write("\nTTC," + str(total_time))
 
         profiling.close()
-
+        
         print 'The total execution time is: %f minutes' % total_time
         
 
